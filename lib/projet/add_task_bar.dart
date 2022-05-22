@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gestion_des_taches/projet/theme.dart';
+import 'package:gestion_des_taches/projet/widgets/button.dart';
 import 'package:gestion_des_taches/projet/widgets/input_field.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -149,8 +150,11 @@ Widget build(BuildContext context) {
               ),
               SizedBox(height: 18,),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  _coloPallete()
+                  _coloPallete(),
+                  MyButton(label: "       Create Task", onTap: ()=> null)
 
                 ],
               )
@@ -162,6 +166,7 @@ Widget build(BuildContext context) {
       )
     );
 }
+
 _appBar(){
   return AppBar(
 
