@@ -18,6 +18,7 @@ class _AddTaskPageState extends State<AddTaskPage>{
   DateTime _selectedDate = DateTime.now();
   String _endTime="10:00 PM";
   String _startTime= DateFormat("hh:mm a").format(DateTime.now()).toString();
+
 @override
 Widget build(BuildContext context) {
   return Scaffold(
@@ -44,7 +45,43 @@ Widget build(BuildContext context) {
                   },
               ),
               ),
+              Row (
+                children: [
+                  Expanded(
+                    child: MyInputField(
+                     title: "Start Date",
+                      hint: _startTime ,
+                      widget: IconButton(
+                        onPressed: (){
+                          _getTimeFromUser(isStarTime: true);
 
+                        },
+                        icon: Icon(
+                          Icons.access_time_rounded,
+                          color:Colors.grey
+                        )
+                      )
+                    ),
+                  ),
+                  SizedBox(width: 12,),
+                  Expanded(
+                    child: MyInputField(
+                        title: "End Date",
+                        hint: _endTime ,
+                        widget: IconButton(
+                            onPressed: (){
+                              _getTimeFromUser(isStarTime: false);
+
+                            },
+                            icon: Icon(
+                                Icons.access_time_rounded,
+                                color:Colors.grey
+                            )
+                        )
+                    ),
+                  ),
+                ],
+              )
 
           ],
         ),
@@ -94,6 +131,39 @@ _getDateFromUser () async {
 
 }
 
+_getTimeFromUser({required bool isStarTime}) async{
+  var pickedTime = await _showTimePicker();
+  String _formatedTime = pickedTime.format(context);
+  if(pickedTime==null){
+    print("Time cannelc");
 
+  }else if(isStarTime==true){
+
+    setState((){
+      _startTime=_formatedTime;
+    });
+
+
+  }else if(isStarTime==false){
+    setState(() {
+      _endTime=_formatedTime;
+    });
+
+
+  }
+
+}
+_showTimePicker(){
+  return
+    showTimePicker(
+      initialEntryMode: TimePickerEntryMode.input,
+        context: context,
+        initialTime: TimeOfDay(
+
+            hour: int.parse(_startTime.split(":")[0]),
+            minute: int.parse(_startTime.split(":")[1].split(" ")[0]),
+  )
+    );
+}
 
 }
