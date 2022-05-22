@@ -34,6 +34,8 @@ class _AddTaskPageState extends State<AddTaskPage>{
     "Monthly"
   ];
 
+  int _selectedColor = 0;
+
 @override
 Widget build(BuildContext context) {
   return Scaffold(
@@ -145,6 +147,13 @@ Widget build(BuildContext context) {
                     ).toList(),
                   )
               ),
+              SizedBox(height: 18,),
+              Row(
+                children: [
+                  _coloPallete()
+
+                ],
+              )
 
 
             ],
@@ -228,6 +237,46 @@ _showTimePicker(){
             minute: int.parse(_startTime.split(":")[1].split(" ")[0]),
   )
     );
+}
+
+_coloPallete(){
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text("Color",
+        style:titleStyle,
+      ),
+      SizedBox(height: 8.0,),
+      Wrap(
+        children: List<Widget>.generate(
+            3,
+                (int index){
+              return GestureDetector(
+                onTap:(){
+                  setState(() {
+                    _selectedColor = index;
+                    print("$index");
+                  });
+
+
+                },
+                child: Padding (
+                  padding: const EdgeInsets.all( 8.0),
+                  child: CircleAvatar (
+                    radius: 14,
+                    backgroundColor: index==0?Colors.blueAccent:index==1?Colors.pinkAccent:Colors.yellowAccent,
+                    child: _selectedColor==index?Icon(Icons.done,
+                        color:Colors.white,
+                        size:16
+                    ):Container(),
+                  ),
+                ),
+              );
+            }
+        ),
+      )
+    ],
+  );
 }
 
 }
