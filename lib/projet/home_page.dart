@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:intl/intl.dart';
 
 import '../services/notification_services.dart';
 import '../services/theme_services.dart';
@@ -31,13 +32,17 @@ class _HomePageState extends State<HomePage> {
       appBar: _appBar(),
       body: Column(
         children: [
-          Text("Theme Data",
-          style: TextStyle(
-            fontSize: 30
-          ),
+          Row(
+            children : [
+              Column(
+                children: [
+                  Text( DateFormat.yMMMMd().format(DateTime.now())),
+                ],
+              )
+            ],
           )
-        ]
-      )
+        ],
+      ),
     );
 
 
