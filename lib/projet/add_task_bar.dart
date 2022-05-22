@@ -16,6 +16,8 @@ class  AddTaskPage extends StatefulWidget {
 }
 
 class _AddTaskPageState extends State<AddTaskPage>{
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _noteController = TextEditingController();
   DateTime _selectedDate = DateTime.now();
   String _endTime="10:00 PM";
   String _startTime= DateFormat("hh:mm a").format(DateTime.now()).toString();
@@ -51,8 +53,9 @@ Widget build(BuildContext context) {
                 "Add Task",
                 style:HeadingStyle,
            ),
-              MyInputField(title: "Title", hint: "Enter your title"),
-              MyInputField(title: "note", hint: "Enter your note"),
+              MyInputField(title: "Title", hint: "Enter your title",controller: _titleController,),
+              MyInputField(title: "note", hint: "Enter your note",controller: _noteController,),
+
               MyInputField(title: "Date", hint: DateFormat.yMd().format(_selectedDate),
               widget: IconButton(
                 icon: Icon(Icons.calendar_today_outlined),
@@ -154,7 +157,7 @@ Widget build(BuildContext context) {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   _coloPallete(),
-                  MyButton(label: "       Create Task", onTap: ()=> null)
+                  MyButton(label: "      Create Task", onTap: ()=> _validatedDate())
 
                 ],
               )
@@ -166,7 +169,22 @@ Widget build(BuildContext context) {
       )
     );
 }
+_validatedDate(){
+  if(_titleController.text.isNotEmpty&&_noteController.text.isNotEmpty){
+    // add to data base
+    Get.back();
+  }else if (_titleController.text.isEmpty ||_noteController.text.isEmpty){
+    Get.snackbar ( "Required", "All fields are required ! ",
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: Colors.white,
+      colorText: Colors.red,
+      icon:Icon(Icons.warning_amber_rounded,
+      color: Colors.red,
+      )
+    );
+  }
 
+}
 _appBar(){
   return AppBar(
 
