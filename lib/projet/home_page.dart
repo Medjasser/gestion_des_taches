@@ -35,12 +35,22 @@ class _HomePageState extends State<HomePage> {
           Row(
             children : [
               Column(
-                children: [
-                  Text( DateFormat.yMMMMd().format(DateTime.now())),
-                ],
-              )
-            ],
-          )
+                Container(
+                  margin: const EdgeINsets.symmetric(horizontal:20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                     Text( DateFormat.yMMMMd().format(DateTime.now()),
+                     style: subHeadingStyle,
+                     ),
+                      Text("Today"),
+                      style: HeadingStyle,
+                    ],
+                  ),
+                ),
+              ),
+            ]
+          ),
         ],
       ),
     );
