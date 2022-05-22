@@ -56,13 +56,17 @@ class _HomePageState extends State<HomePage> {
           notifyHelper.scheduledNotification();
 
         },
-        child: Icon(Icons.nightlight_round,
-        size: 20,),
+        child: Icon(Icons.wb_sunny_outlined,
+        size: 20,
+
+        ),
       ),
       actions: [
-        Icon(Icons.person,
-          size: 20,),
-        SizedBox(width:20,),
+        CircleAvatar(
+          backgroundImage: AssetImage(
+            "images/avatar.jpg"
+          ),
+        ),
       ],
     );
     }
