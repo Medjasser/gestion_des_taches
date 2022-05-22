@@ -2,11 +2,14 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gestion_des_taches/controllers/task_controller.dart';
 import 'package:gestion_des_taches/projet/theme.dart';
 import 'package:gestion_des_taches/projet/widgets/button.dart';
 import 'package:gestion_des_taches/projet/widgets/input_field.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+
+import '../models/task.dart';
 
 class  AddTaskPage extends StatefulWidget {
   const AddTaskPage({Key? key}) : super(key: key);
@@ -16,6 +19,7 @@ class  AddTaskPage extends StatefulWidget {
 }
 
 class _AddTaskPageState extends State<AddTaskPage>{
+  final TaskControler _taskControler = Get.put(TaskControler());
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _noteController = TextEditingController();
   DateTime _selectedDate = DateTime.now();
@@ -171,7 +175,7 @@ Widget build(BuildContext context) {
 }
 _validatedDate(){
   if(_titleController.text.isNotEmpty&&_noteController.text.isNotEmpty){
-    // add to data base
+    _addTaskToDb();
     Get.back();
   }else if (_titleController.text.isEmpty ||_noteController.text.isEmpty){
     Get.snackbar ( "Required", "All fields are required ! ",
@@ -183,6 +187,24 @@ _validatedDate(){
       )
     );
   }
+
+}
+
+_addTaskToDb() async {
+  int value = await _taskControler.addTask(
+      task:Task(
+        note: _noteController.text,
+        title: _titleController.text,
+        date: DateFormat.yMd().format(_selectedDate),
+        startTime: _startTime,
+        endTime: _endTime,
+        remind: _selexctedRemind,
+        repeat: _selexctedRepeat,
+        color: _selectedColor,
+        isCompleted: 0,
+      )
+  );
+  print("My ID is "+"$value");
 
 }
 _appBar(){
