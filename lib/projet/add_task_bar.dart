@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:gestion_des_taches/projet/theme.dart';
 import 'package:gestion_des_taches/projet/widgets/input_field.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class  AddTaskPage extends StatefulWidget {
   const AddTaskPage({Key? key}) : super(key: key);
@@ -15,6 +16,8 @@ class  AddTaskPage extends StatefulWidget {
 
 class _AddTaskPageState extends State<AddTaskPage>{
   DateTime _selectedDate = DateTime.now();
+  String _endTime="10:00 PM";
+  String _startTime= DateFormat("hh:mm a").format(DateTime.now()).toString();
 @override
 Widget build(BuildContext context) {
   return Scaffold(
@@ -31,6 +34,17 @@ Widget build(BuildContext context) {
            ),
               MyInputField(title: "Title", hint: "Enter your title"),
               MyInputField(title: "note", hint: "Enter your note"),
+              MyInputField(title: "Date", hint: DateFormat.yMd().format(_selectedDate),
+              widget: IconButton(
+                icon: Icon(Icons.calendar_today_outlined),
+                onPressed: () {
+                  print("hi");
+                  _getDateFromUser();
+
+                  },
+              ),
+              ),
+
 
           ],
         ),
@@ -60,4 +74,26 @@ _appBar(){
     ],
   );
 }
+
+_getDateFromUser () async {
+  DateTime? _pickerDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2022),
+      lastDate: DateTime(2025)
+  );
+  if( _pickerDate!= null){
+    setState(() {
+      _selectedDate = _pickerDate;
+      print(_selectedDate);
+    });
+
+  }else {
+    print("It's null ");
+  }
+
+}
+
+
+
 }
