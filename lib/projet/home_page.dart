@@ -70,8 +70,10 @@ class _HomePageState extends State<HomePage> {
 
       children : [
         Container(
+
           margin: const EdgeInsets.symmetric(horizontal:20),
           child: Column(
+
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text( DateFormat.yMMMMd().format(DateTime.now()),
