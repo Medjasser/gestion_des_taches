@@ -19,7 +19,7 @@ class Themes{
 TextStyle get subHeadingStyle{
   return GoogleFonts.lato (
       textStyle: TextStyle(
-        fontSize: 24,
+        fontSize: 20,
         fontWeight: FontWeight.bold
       )
   );
@@ -28,7 +28,7 @@ TextStyle get subHeadingStyle{
 TextStyle get HeadingStyle{
   return GoogleFonts.lato (
       textStyle: TextStyle(
-          fontSize: 30,
+          fontSize: 25,
           fontWeight: FontWeight.bold
       )
   );

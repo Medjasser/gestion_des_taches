@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gestion_des_taches/projet/theme.dart';
+import 'package:gestion_des_taches/projet/widgets/button.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:intl/intl.dart';
@@ -33,24 +35,25 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         children: [
           Row(
+
             children : [
-              Column(
                 Container(
-                  margin: const EdgeINsets.symmetric(horizontal:20),
+                  margin: const EdgeInsets.symmetric(horizontal:20),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                      Text( DateFormat.yMMMMd().format(DateTime.now()),
                      style: subHeadingStyle,
                      ),
-                      Text("Today"),
+                      Text("Today",
                       style: HeadingStyle,
+                      )
                     ],
                   ),
                 ),
-              ),
-            ]
-          ),
+                MyButton(label: "       ADD TASK ", onTap: ()=>null)
+            ],
+          )
         ],
       ),
     );
