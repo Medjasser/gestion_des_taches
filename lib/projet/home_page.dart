@@ -9,6 +9,7 @@ import 'package:intl/intl.dart';
 
 import '../services/notification_services.dart';
 import '../services/theme_services.dart';
+import 'add_task_bar.dart';
 
 
 
@@ -37,26 +38,30 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         children: [
           _addTaskBar(),
-          Container(
-            margin: const EdgeInsets.only(top:20),
-            child: DatePicker(
-              DateTime.now(),
-              height: 100,
-              width: 80,
-              initialSelectedDate: DateTime.now(),
-              selectionColor: Colors.blue,
-              dateTextStyle: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w600,
-                color: Colors.grey
-              ),
-              onDateChange: (date){
-                _selectedDate=date;
-              },
+          _addDateBar(),
 
-            ),
-          )
         ],
+      ),
+    );
+    }
+    _addDateBar(){
+    return Container(
+      margin: const EdgeInsets.only(top:20),
+      child: DatePicker(
+        DateTime.now(),
+        height: 100,
+        width: 80,
+        initialSelectedDate: DateTime.now(),
+        selectionColor: Colors.blue,
+        dateTextStyle: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+            color: Colors.grey
+        ),
+        onDateChange: (date){
+          _selectedDate=date;
+        },
+
       ),
     );
     }
@@ -78,7 +83,7 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
-        MyButton(label: "       ADD TASK ", onTap: ()=>null)
+        MyButton(label: "       ADD TASK ", onTap: ()=> Get.to(AddTaskPage()))
       ],
     );
     }
